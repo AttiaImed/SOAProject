@@ -9,10 +9,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class LogementBusiness {
-    private List<Logement> logements ;
+    private List<Logement> logements =new ArrayList<Logement>();;
 
     public LogementBusiness() {
-        logements=new ArrayList<Logement>();
         logements.add(new Logement(1,"27, Rue des roses", "El ghazela","Ariana","Studio","cuisine equipee",300f));
         logements.add(new Logement(5,"58, Rue des roses", "El ghazela","Ariana","EtageVilla","cuisine equipee",450f));
         logements.add(new Logement(2,"201, R�sidence Omrane4", "Riadh El Andalous","Ariana","EtageVilla","chauffage central, ascenseur, climatisation",700f));
@@ -34,7 +33,6 @@ public class LogementBusiness {
         return null;
     }
     public boolean addLogement(Logement logement){
-        System.out.println(logement.getPrix());
        return logements.add(logement);
     }
     public List<Logement> getLogementsByDeleguation(String deleguation){

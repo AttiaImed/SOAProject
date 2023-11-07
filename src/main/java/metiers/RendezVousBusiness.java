@@ -12,6 +12,14 @@ public class RendezVousBusiness {
     LogementBusiness logementMetier=new LogementBusiness();
     public RendezVousBusiness() {
       listeRendezVous = new ArrayList<>();
+        Logement l = new Logement(1,"27, Rue des roses", "El ghazela","Ariana","Studio","cuisine equipee",300f);
+
+        listeRendezVous.add(new RendezVous(1,"27, Rue des roses", "El ghazela",l,"fdsfdfs"));
+        listeRendezVous.add(new RendezVous(5,"58, Rue des roses", "El ghazela",l,"dfvb"));
+        listeRendezVous.add(new RendezVous(2,"201, Rue des roses", "El ghazela",l,"dfvb"));
+        listeRendezVous.add(new RendezVous(3,"540, Rue des roses", "El ghazela",l,"dfvb"));
+        listeRendezVous.add(new RendezVous(4,"78,Rue des roses", "El ghazela",l,"dfvb"));
+
     }
 
 

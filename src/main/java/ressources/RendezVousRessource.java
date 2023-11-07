@@ -35,7 +35,7 @@ public class RendezVousRessource {
     }
 
     @GET
-    @Produces({"application/json"})
+    @Produces("application/json")
     public Response getRendezVous(@QueryParam("refLogement") String refLogement) {
         new ArrayList();
         List liste;

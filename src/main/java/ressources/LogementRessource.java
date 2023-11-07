@@ -17,8 +17,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import filters.Secured;
 import metiers.LogementBusiness;
 
 @Path("logements")
@@ -28,14 +31,19 @@ public class LogementRessource {
     public LogementRessource() {
     }
 
+    @Secured
     @POST
-    @Consumes("application/json")
-    public Response addLogement(Logement l) {
-        return logementMetier.addLogement(l) ? Response.status(Status.CREATED).build() : Response.status(Status.NOT_FOUND).build();
+    @Path("/post")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addLogement( Logement l) {
+        System.out.println("helooooooo//////////////////////////////////");
+         return logementMetier.addLogement(l) ? Response.status(Status.CREATED).build() : Response.status(Status.NOT_IMPLEMENTED).build() ;
+
     }
 
+    @Secured
     @GET
-    @Produces({"application/json"})
+    @Produces("application/json")
     public Response getLogements(@QueryParam("delegation") String delegation, @QueryParam("reference") String reference) {
         new ArrayList();
         List liste;
@@ -50,16 +58,16 @@ public class LogementRessource {
         return liste.size() == 0 ? Response.status(Status.NOT_FOUND).build() : Response.status(Status.OK).entity(liste).build();
     }
 
-    @PUT
-    @Consumes({"application/xml"})
-    @Path("{id}")
-    public Response updateLogement(Logement updatedLogement, @PathParam("id") int reference) {
-        return logementMetier.updateLogement(reference, updatedLogement) ? Response.status(Status.OK).build() : Response.status(Status.NOT_FOUND).build();
-    }
-
-    @Path("{id}")
-    @DELETE
-    public Response deleteLogement(@PathParam("id") int reference) {
-        return logementMetier.deleteLogement(reference) ? Response.status(Status.OK).build() : Response.status(Status.NOT_FOUND).build();
-    }
+//    @PUT
+//    @Consumes({"application/xml"})
+//    @Path("{id}")
+//    public Response updateLogement(Logement updatedLogement, @PathParam("id") int reference) {
+//        return logementMetier.updateLogement(reference, updatedLogement) ? Response.status(Status.OK).build() : Response.status(Status.NOT_FOUND).build();
+//    }
+//
+//    @Path("{id}")
+//    @DELETE
+//    public Response deleteLogement(@PathParam("id") int reference) {
+//        return logementMetier.deleteLogement(reference) ? Response.status(Status.OK).build() : Response.status(Status.NOT_FOUND).build();
+//    }
 }
