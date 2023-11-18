@@ -32,17 +32,16 @@ public class AuthenticationEndPoint {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response authenticateUser(Credentials cred) {
-        System.out.println(cred);
+//        System.out.println(cred);
 
         try {
 
             // Authenticate the user using the credentials provided
             //authenticate(username, password);
-            System.out.println(cred);
+            //System.out.println(cred);
             authenticate(cred.getUsername(), cred.getPassword());
 
             // Issue a token for the user
-
 
             //String token = issueToken(username);
             String token = issueToken(cred.getUsername());
@@ -59,7 +58,7 @@ public class AuthenticationEndPoint {
     private void authenticate(String username, String password) {
         // Authenticate against a database, LDAP, file or whatever
         // Throw an Exception if the credentials are invalid
-        System.out.println("Authenticating user...");
+//        System.out.println("Authenticating user...");
 
     }
 
@@ -71,16 +70,16 @@ public class AuthenticationEndPoint {
         String keyString = "simplekey";
 
         Key key = new SecretKeySpec(keyString.getBytes(), 0, keyString.getBytes().length, "DES");
-        System.out.println("the key is : " + key.hashCode());
-
-        System.out.println("uriInfo.getAbsolutePath().toString() : " + uriInfo.getAbsolutePath().toString());
-        System.out.println("Expiration date: " + toDate(LocalDateTime.now().plusMinutes(15L)));
+//        System.out.println("the key is : " + key.hashCode());
+//
+//        System.out.println("uriInfo.getAbsolutePath().toString() : " + uriInfo.getAbsolutePath().toString());
+//        System.out.println("Expiration date: " + toDate(LocalDateTime.now().plusMinutes(15L)));
 
         String jwtToken = Jwts.builder().setSubject(username).setIssuer(uriInfo.getAbsolutePath().toString())
                 .setIssuedAt(new Date()).setExpiration(toDate(LocalDateTime.now().plusMinutes(15L)))
                 .signWith(SignatureAlgorithm.HS512, key).compact();
 
-        System.out.println("the returned token is : " + jwtToken);
+//        System.out.println("the returned token is : " + jwtToken);
         return jwtToken;
     }
 

@@ -75,7 +75,6 @@ public class RendezVousBusiness {
 
                 Logement logement = logementMetier.getLogementsByReference(updatedRendezVous.getLogement().getReference());
                 if (logement != null) {
-
                     listeRendezVous.set(i, updatedRendezVous);
                     return true;
                 }

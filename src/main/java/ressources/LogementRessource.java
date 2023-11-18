@@ -24,6 +24,7 @@ import javax.ws.rs.core.Response.Status;
 import filters.Secured;
 import metiers.LogementBusiness;
 
+@Secured
 @Path("logements")
 public class LogementRessource {
     public static LogementBusiness logementMetier = new LogementBusiness();
@@ -31,17 +32,14 @@ public class LogementRessource {
     public LogementRessource() {
     }
 
-    @Secured
     @POST
     @Path("/post")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addLogement( Logement l) {
-        System.out.println("helooooooo//////////////////////////////////");
          return logementMetier.addLogement(l) ? Response.status(Status.CREATED).build() : Response.status(Status.NOT_IMPLEMENTED).build() ;
 
     }
 
-    @Secured
     @GET
     @Produces("application/json")
     public Response getLogements(@QueryParam("delegation") String delegation, @QueryParam("reference") String reference) {
@@ -58,16 +56,16 @@ public class LogementRessource {
         return liste.size() == 0 ? Response.status(Status.NOT_FOUND).build() : Response.status(Status.OK).entity(liste).build();
     }
 
-//    @PUT
-//    @Consumes({"application/xml"})
-//    @Path("{id}")
-//    public Response updateLogement(Logement updatedLogement, @PathParam("id") int reference) {
-//        return logementMetier.updateLogement(reference, updatedLogement) ? Response.status(Status.OK).build() : Response.status(Status.NOT_FOUND).build();
-//    }
-//
-//    @Path("{id}")
-//    @DELETE
-//    public Response deleteLogement(@PathParam("id") int reference) {
-//        return logementMetier.deleteLogement(reference) ? Response.status(Status.OK).build() : Response.status(Status.NOT_FOUND).build();
-//    }
+    @PUT
+    @Consumes({"application/xml"})
+    @Path("{id}")
+    public Response updateLogement(Logement updatedLogement, @PathParam("id") int reference) {
+        return logementMetier.updateLogement(reference, updatedLogement) ? Response.status(Status.OK).build() : Response.status(Status.NOT_FOUND).build();
+    }
+
+    @Path("{id}")
+    @DELETE
+    public Response deleteLogement(@PathParam("id") int reference) {
+        return logementMetier.deleteLogement(reference) ? Response.status(Status.OK).build() : Response.status(Status.NOT_FOUND).build();
+    }
 }
